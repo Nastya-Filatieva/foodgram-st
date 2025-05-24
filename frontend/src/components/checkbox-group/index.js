@@ -10,15 +10,14 @@ const CheckboxGroup = ({
   handleChange,
   className,
   labelClassName,
-  checkboxClassName,
-  emptyText
+  tagsClassName,
+  checkboxClassName
 }) => {
   return <div className={cn(styles.checkboxGroup, className)}>
     {label && <div className={cn(styles.label, labelClassName)}>
       {label}
     </div>}
-    <div className={cn(styles.checkboxGroupItems)}>
-      {values.length === 0 && emptyText && <div className={styles.noValues}>{emptyText}</div>}
+    <div className={cn(styles.checkboxGroupItems, tagsClassName)}>
       {values.map(item => {
         return <Checkbox
           key={item.id}
