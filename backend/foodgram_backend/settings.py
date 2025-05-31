@@ -30,8 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-AUTH_USER_MODEL = 'users.FoodgramUser'
-
 
 # Application definition
 
@@ -85,15 +83,10 @@ WSGI_APPLICATION = 'foodgram_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('POSTGRES_DB', 'foodgram'),
-        'USER': os.getenv('POSTGRES_USER', 'foodgram_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432),
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '/data/db.sqlite3',
 }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -156,9 +149,9 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'HIDE_USERS': False,
     'SERIALIZERS': {
-        'user_create': 'users.serializers.UserRegistrationSerializer',
-        'user': 'users.serializers.UserProfileSerializer',
-        'current_user': 'users.serializers.UserProfileSerializer',
+        'user_create': 'foodgram_user.serializers.UserRegistrationSerializer',
+        'user': 'foodgram_user.serializers.UserProfileSerializer',
+        'current_user': 'foodgram_user.serializers.UserProfileSerializer',
     },
     'PERMISSIONS': {
         'user': ['rest_framework.permissions.IsAuthenticated'],

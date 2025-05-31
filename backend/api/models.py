@@ -1,5 +1,5 @@
 from django.db import models
-from foodgram_user.models import AbstractFoodgramUser
+from foodgram_user.models import FoodgramUser
 
 
 class Ingredient(models.Model):
@@ -31,7 +31,7 @@ class Category(models.Model):
 class Recipe(models.Model):
     """Модель рецепта"""
     author = models.ForeignKey(
-        AbstractFoodgramUser,
+        FoodgramUser,
         verbose_name='Автор',
         on_delete=models.CASCADE,
         related_name='recipes'
@@ -88,7 +88,7 @@ class RecipeIngredient(models.Model):
 class FavouritesRecipes(models.Model):
     """Избранные рецепты"""
     user = models.ForeignKey(
-        AbstractFoodgramUser,
+        FoodgramUser,
         on_delete=models.CASCADE,
         related_name='favorites',
         verbose_name='Пользователь'
@@ -120,7 +120,7 @@ class FavouritesRecipes(models.Model):
 class ShoppingList(models.Model):
     """Список покупок"""
     user = models.ForeignKey(
-        AbstractFoodgramUser,
+        FoodgramUser,
         on_delete=models.CASCADE,
         related_name='shopping_list',
         verbose_name='Пользователь'

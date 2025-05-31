@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from .models import FoodgramUser, Subscription
-from api.serializers import RecipeListSerializer
+from foodgram_user.models import FoodgramUser
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -56,12 +56,17 @@ class UserLoginSerializer(serializers.Serializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """Сериализатор профиля пользователя"""
-    recipes = RecipeListSerializer(many=True, read_only=True)
+    recipes = serializers.SerializerMethodField()
     is_subscribed = serializers.SerializerMethodField()
 
     class Meta:
         model = FoodgramUser
         fields = ['id', 'username', 'recipes', 'is_subscribed']
+
+    def get_recipes(self, obj):
+        from api.serializers import RecipeListSerializer
+        recipes = obj.recipes.all()
+        return RecipeListSerializer(recipes, many=True, context=self.context).data
 
     def get_is_subscribed(self, obj):
         user = self.context.get('request').user

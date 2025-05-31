@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),  # URL для приложения api
-    path('users/', include('users.urls')),  # URL для приложения users
+    path('api/', include('api.urls')),
+    path('foodgram_user/', include('foodgram_user.urls')),
 ]
