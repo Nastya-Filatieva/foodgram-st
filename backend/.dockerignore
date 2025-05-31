@@ -1,14 +1,4 @@
-# Django stuff:
-db.sqlite3
-
-# Environments
+# Файл .dockerignore
 venv
 .git
-.env
-
-# Папки, создаваемые средой разработки
-.idea
-.vscode
-
-# папки со статикой и медиа
-media/
+db.sqlite3
